@@ -162,6 +162,12 @@ struct TransferFunction
     detrend::Bool
 end
 
+struct ClimDataset
+    data::AxisArray
+    varattrib::NCDatasets.Attributes
+    globalattrib::NCDatasets.Attributes
+end
+
 # Included files
 include("functions.jl")
 include("indices.jl")
@@ -174,6 +180,7 @@ include("export.jl")
 include("time.jl")
 include("spatial.jl")
 include("analysis.jl")
+include("datasets.jl")
 
 # Exported functions
 export ClimGrid
@@ -204,5 +211,8 @@ export monthmean, monthsum, temporalmean
 export yearmonthdayhour
 export write
 
+# Datasets branch tests
+export ClimDataset
+export dataset
 
 end #module

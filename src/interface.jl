@@ -185,3 +185,17 @@ Base.show(io::IO, ::MIME"text/plain", ITP::TransferFunction) = print(io, "Transf
     "Interpolation array: ", size(ITP.itp), " transfer functions", "\n",
     "Method: ", ITP.method, "\n",
     "Detrended: ", ITP.detrend)
+
+Base.show(io::IO, ::MIME"text/plain", C::ClimDataset) = print(io, "ClimDataset struct with data:\n   ",
+    C.data.data,
+    # "Project: ", C.project, "\n",
+    # "Institute: ", C.institute, "\n",
+    # "Model: ", C[3], "\n",
+    # "Experiment: ", C[4], "\n",
+    # "Run: ", C[5], "\n",
+    # "Variable: ", C[9], "\n",
+    # # "Variable CF standard name: ", C.varattribs["standard_name"], "\n",
+    # "Frequency: ", C.frequency, "\n",
+    # "Global attributes: ", summary(C[12]), "\n",
+    # "Global Attributes: ", C.globalattrib)
+    )
