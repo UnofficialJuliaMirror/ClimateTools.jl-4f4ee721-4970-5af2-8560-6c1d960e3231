@@ -134,7 +134,7 @@ ds.attrib["cmor_version"] = "2.5.4"
 close(ds)
 
 
-
+    # TODO Should loop only on polygon/mask if provided
     for i = 1:size(C.data.data, 1)
         for j = 1:size(C.data.data, 2)
             datavec = C.data.data[i, j, :] .+ rand(1)
