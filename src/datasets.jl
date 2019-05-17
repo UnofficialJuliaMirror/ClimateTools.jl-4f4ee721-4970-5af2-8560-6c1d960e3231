@@ -1,7 +1,9 @@
+# mfds = Dataset(fnames);
+#
+# collect(sum(X,dims = 3))
 
-
-function dataset(file::String, vari::String)
-    ds = Dataset(file)
+function dataset(file::String, vari::String; mode::String="r")
+    ds = Dataset(file, mode)
     dsvar = ds[vari]
     timevec = ds["time"][:]
     lon = nomissing(ds["lon"][:], NaN)
@@ -12,7 +14,31 @@ function dataset(file::String, vari::String)
 
     A = AxisArray(dsvar, Axis{:lon}(lon), Axis{:lat}(lat), Axis{:time}(timevec))
 
-    return ClimDataset(A, varattrib, globalattrib)
+    return ClimDataset(A, ds, varattrib, globalattrib)
+end
+
+function loop_dataset!(C::ClimDataset)
+
+    # R = CartesianIndices(size(C.data)[1:3-1])
+
+    # X = Distribute(Blocks(2,3,1), C.data.data)
+    #
+    # return collect(sum(X, dims = 3))
+
+    # for i in R#CartesianIndices(C.data)# 1:size(C.data.data, 3)
+    for j = 1:size(C.data,2)
+        for i = 1:size(C.data,1)
+            println(i)
+        #CartesianIndices(C.data)# 1:size(C.data.data, 3)
+            C.data.data[i,j, :] = C.data.data[i,j, :] .+ 2.0
+        end
+    end
+
+    return C
+end
+
+function close(C::ClimDataset)
+    NCDatasets.close(C.dataset)
 end
 
 function processdata(C::ClimDataset)

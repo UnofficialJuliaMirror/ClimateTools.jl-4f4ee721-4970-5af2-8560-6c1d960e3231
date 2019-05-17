@@ -20,6 +20,7 @@ using Polynomials
 using IterTools
 using Statistics
 using Dates
+using Dagger
 import Base.vcat
 import Base.getindex
 import Base.show
@@ -164,6 +165,7 @@ end
 
 struct ClimDataset
     data::AxisArray
+    dataset::NCDatasets.Dataset
     varattrib::NCDatasets.Attributes
     globalattrib::NCDatasets.Attributes
 end
